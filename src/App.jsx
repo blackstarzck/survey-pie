@@ -1,11 +1,16 @@
-import ProgressIndicator from './components/ProgressIndicator';
-import QuestionBox from './components/QuestionBox';
+import { Routes, Route } from 'react-router-dom';
+import SurveyPage from './pages/SurveyPage';
+import CompletionPage from './pages/CompletionPage';
 
 const App = () => {
   return (
     <div className="App">
-      <ProgressIndicator />
-      <QuestionBox />
+      <Routes>
+        <Route path="/survey/:surveyId" element={<SurveyPage />}>
+          <Route path=":step" element={<SurveyPage />} />
+        </Route>
+        <Route path="/complete" element={<CompletionPage />} />
+      </Routes>
     </div>
   );
 };

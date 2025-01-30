@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-const Input = styled.input`
+const TextArea = styled.textarea`
+  height: 196px;
   border: 1px solid #c0c0c0;
   box-sizing: border-box;
   border-radius: 5px;
@@ -8,11 +9,12 @@ const Input = styled.input`
   line-height: 21px;
   padding: 12px 18px;
   outline: none;
+  resize: none;
 `;
 
-const TextInput = ({ answer, setAnswer, options }) => {
+const TextAreaInput = ({ answer, setAnswer, options }) => {
   return (
-    <Input
+    <TextArea
       type="text"
       placeholder={options.placeholder}
       value={answer}
@@ -23,4 +25,4 @@ const TextInput = ({ answer, setAnswer, options }) => {
   );
 };
 
-export default TextInput;
+export default TextAreaInput;

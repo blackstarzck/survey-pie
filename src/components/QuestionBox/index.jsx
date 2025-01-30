@@ -3,13 +3,18 @@ import Body from '../Body';
 import Desc from '../Desc';
 import Title from '../Title';
 
-const QuestionBox = () => {
+const QuestionBox = ({ question, questionLength, step, answer, setAnswer }) => {
   return (
     <div>
-      <Title>타이틀입니다.</Title>
-      <Desc>설명입니다.</Desc>
-      <Body type={'text'} />
-      <ActionButtons type={'text'} />
+      <Title>{question.title}</Title>
+      <Desc>{question.desc}</Desc>
+      <Body
+        type={question.type}
+        answer={answer}
+        setAnswer={setAnswer}
+        options={question.options}
+      />
+      <ActionButtons questionLength={questionLength} step={step} />
     </div>
   );
 };

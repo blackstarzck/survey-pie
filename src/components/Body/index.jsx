@@ -1,16 +1,28 @@
 import TextInput from '../TextInput';
+import TextAreaInput from '../TextAreaInput';
+import SelectInput from '../SelectInput';
 
-const Body = ({ type }) => {
+const Body = ({ type, answer, setAnswer, options }) => {
+  let InputComponent = null;
+
   switch (type) {
     case 'select':
-      return <div>type is select</div>;
+      InputComponent = SelectInput;
+      break;
     case 'text':
-      return <TextInput />;
+      InputComponent = TextInput;
+      break;
     case 'textarea':
-      return <div>type is textarea</div>;
+      InputComponent = TextAreaInput;
+      break;
     default:
-      return <div>type is default</div>;
+      InputComponent = TextInput;
+      break;
   }
+
+  return (
+    <InputComponent answer={answer} setAnswer={setAnswer} options={options} />
+  );
 };
 
 export default Body;
