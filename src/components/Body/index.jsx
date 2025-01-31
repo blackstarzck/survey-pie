@@ -1,6 +1,7 @@
 import TextInput from '../TextInput';
 import TextAreaInput from '../TextAreaInput';
 import SelectInput from '../SelectInput';
+import styled from 'styled-components';
 
 const Body = ({ type, answer, setAnswer, options }) => {
   let InputComponent = null;
@@ -21,8 +22,15 @@ const Body = ({ type, answer, setAnswer, options }) => {
   }
 
   return (
-    <InputComponent answer={answer} setAnswer={setAnswer} options={options} />
+    <BodyWrapper>
+      <InputComponent answer={answer} setAnswer={setAnswer} options={options} />
+    </BodyWrapper>
   );
 };
+
+const BodyWrapper = styled.div`
+  margin: 0 38px;
+  flex: 1;
+`;
 
 export default Body;

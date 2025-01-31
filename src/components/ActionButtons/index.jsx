@@ -1,13 +1,14 @@
 import { use } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button';
+import styled from 'styled-components';
 
 const ActionButtons = ({ questionLength, step }) => {
   let isLast = questionLength - 1 === step;
   const navigate = useNavigate();
 
   return (
-    <div>
+    <ActionButtonsWrapper>
       {step === 0 || (
         <Button
           type="TERTIARY"
@@ -37,8 +38,15 @@ const ActionButtons = ({ questionLength, step }) => {
           다음
         </Button>
       )}
-    </div>
+    </ActionButtonsWrapper>
   );
 };
+
+const ActionButtonsWrapper = styled.div`
+  margin-top: 72px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+`;
 
 export default ActionButtons;
