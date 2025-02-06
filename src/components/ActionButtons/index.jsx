@@ -5,17 +5,22 @@ import { useRecoilValue } from 'recoil';
 import useStep from '../../hooks/useStep';
 import useSurveyId from '../../hooks/useSurveyId';
 import useAnswers from '../../hooks/useAnsers';
+import useRequiredOption from '../../hooks/useRequiredOption';
 import questionsLengthState from '../../store/survey/questionsLengthState';
 import postAnswers from '../../services/postAnswers';
+import { useState } from 'react';
 
 const ActionButtons = () => {
+  const [isPosting, setIsPosting] = useState(false);
   const step = useStep();
   const surveyId = useSurveyId();
   const answers = useAnswers();
   const questionLength = useRecoilValue(questionsLengthState);
+  const isRequired = useRequiredOption();
 
   const isLast = questionLength - 1 === step;
   const navigate = useNavigate();
+  const isBlockToNext = isRequired ? !answers[step]?.length : false;
 
   return (
     <ActionButtonsWrapper>
@@ -33,14 +38,23 @@ const ActionButtons = () => {
         <Button
           type="PRIMARY"
           onClick={() => {
-            postAnswers(surveyId, answers);
-            navigate('/complete');
+            setIsPosting(true);
+            postAnswers(surveyId, answers)
+              .then(() => {
+                navigate(`/complete/${surveyId}`);
+              })
+              .catch((error) => {
+                setIsPosting(false);
+                console.log(error);
+              });
           }}
+          disabled={isPosting || isBlockToNext}
         >
-          제출
+          {isPosting ? '제출 중입니다...' : '제출'}
         </Button>
       ) : (
         <Button
+          disabled={isBlockToNext}
           type="PRIMARY"
           onClick={() => {
             navigate(`${step + 1}`);

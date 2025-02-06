@@ -32,11 +32,11 @@ const ItemWrapper = styled.div`
   }
 `;
 
-const Item = ({ children, onChange }) => {
+const Item = ({ children, checked, onChange }) => {
   return (
     <ItemWrapper>
       <label>
-        <input type="checkbox" onChange={onChange} />
+        <input type="checkbox" checked={checked} onChange={onChange} />
         <div></div>
         <span>{children}</span>
       </label>
@@ -46,17 +46,23 @@ const Item = ({ children, onChange }) => {
 
 const SelectInput = ({ answer = [], setAnswer, options }) => {
   const handleChange = (isChecked, index) => {
-    const value = isChecked
-      ? [...answer, index]
-      : answer.filter((item) => item !== index);
+    if (isChecked) {
+      const max = options?.max || 1;
+      if (answer.length >= max) {
+        return;
+      }
 
-    setAnswer(value);
+      setAnswer([...answer, index]);
+    } else {
+      setAnswer(answer.filter((item) => item !== index));
+    }
   };
 
   return (
     <SelectInputWrapper>
       {options.items.map((item, index) => (
         <Item
+          checked={answer.includes(index)}
           key={index}
           onChange={(e) => {
             handleChange(e.target.checked, index);

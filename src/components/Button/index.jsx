@@ -8,9 +8,10 @@ const colorMap = {
 };
 
 const Button = styled.button`
+  font-size: 18px;
   font-weight: bold;
   padding: 16px 24px;
-  width: 200px;
+  min-width: 200px;
   border-radius: 4px;
   border: none;
   cursor: pointer;

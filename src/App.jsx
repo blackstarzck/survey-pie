@@ -8,10 +8,10 @@ const App = () => {
     <AppWrapper>
       <Box>
         <Routes>
+          <Route path="/complete/:surveyId" element={<CompletionPage />} />
           <Route path="/survey/:surveyId" element={<SurveyPage />}>
             <Route path=":step" element={<SurveyPage />} />
           </Route>
-          <Route path="/complete" element={<CompletionPage />} />
         </Routes>
       </Box>
     </AppWrapper>

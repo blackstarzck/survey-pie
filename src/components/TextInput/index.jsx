@@ -9,6 +9,8 @@ const TextInput = ({ answer = '', setAnswer, options }) => {
       onChange={(e) => {
         setAnswer(e.target.value);
       }}
+      // maxLength={options?.max}
+      {...(options?.max && { maxLength: options.max })}
     />
   );
 };
