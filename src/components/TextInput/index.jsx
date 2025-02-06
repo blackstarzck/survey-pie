@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TextInput = ({ answer, setAnswer, options }) => {
+const TextInput = ({ answer = '', setAnswer, options }) => {
   return (
     <Input
       type="text"

@@ -1,8 +1,8 @@
 import React from 'react';
-import textState from '../../store/test/atom';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import testWithComma from '../../store/test/testWithComma';
+import axios from 'axios';
 
 const CompletionPage = () => {
   const text = useRecoilValue(testWithComma);
