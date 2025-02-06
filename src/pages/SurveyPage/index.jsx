@@ -10,7 +10,6 @@ const SurveyPage = () => {
         <ProgressIndicator />
         <QuestionBox />
       </SurveyPageWrapper>
-      //
     </Suspense>
   );
 };

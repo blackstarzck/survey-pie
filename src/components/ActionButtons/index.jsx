@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import useStep from '../../hooks/useStep';
 import useSurveyId from '../../hooks/useSurveyId';
-import useAnswers from '../../hooks/useAnsers';
+import useAnswers from '../../hooks/useAnswers';
 import useRequiredOption from '../../hooks/useRequiredOption';
 import questionsLengthState from '../../store/survey/questionsLengthState';
 import postAnswers from '../../services/postAnswers';
@@ -14,7 +14,7 @@ const ActionButtons = () => {
   const [isPosting, setIsPosting] = useState(false);
   const step = useStep();
   const surveyId = useSurveyId();
-  const answers = useAnswers();
+  const [answers, setAnswers] = useAnswers();
   const questionLength = useRecoilValue(questionsLengthState);
   const isRequired = useRequiredOption();
 
@@ -41,6 +41,7 @@ const ActionButtons = () => {
             setIsPosting(true);
             postAnswers(surveyId, answers)
               .then(() => {
+                setAnswers([]);
                 navigate(`/complete/${surveyId}`);
               })
               .catch((error) => {
